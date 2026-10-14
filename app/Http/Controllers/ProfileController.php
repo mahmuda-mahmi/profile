@@ -11,9 +11,13 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $profiles = Profile::latest()->get();
+        $profiles = Profile::orderBy('name', 'asc')
+                            ->select('id', 'name', 'email', 'dob', 'phone')
+                            ->paginate(10)
+                            ->withQueryString();
+
         return view('profiles.index', compact('profiles'));
     }
 
@@ -90,7 +94,9 @@ class ProfileController extends Controller
     public function destroy(Profile $profile)
     {
         $profile->delete();
-        return redirect()->route('profile.index')
+        
+        return redirect()
+            ->route('profile.index')
             ->with('success', 'Profile deleted successfully.');
     }
 }
