@@ -9,10 +9,57 @@
                 <div class="card-body">
                     <h1 class="text-3xl font-bold text-center mb-6">Create Account</h1>
 
-                    <form method="POST" action="/register">
+                    <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <!-- Name -->
+                        <label class="label">Name</label>
+                        <input type="text"
+                                name="name"
+                                placeholder="John Doe"
+                                value="{{ old('name') }}"
+                                class="input input-bordered mb-4"
+                                required />
+
+                        <label class="label">Email</label>
+                        <input type="email"
+                                name="email"
+                                placeholder="mail@example.com"
+                                value="{{ old('email') }}"
+                                class="input input-bordered mb-4"
+                                required />
+
+                        <label class="label">Password</label>
+                        <input type="password"
+                                name="password"
+                                placeholder="••••••••"
+                                class="input input-bordered mb-4"
+                                required />
+
+                        <label class="label">Confirm Password</label>
+                        <input type="password"
+                                name="password_confirmation"
+                                placeholder="••••••••"
+                                class="input input-bordered"
+                                required />
+
+
+                        <div class="form-control mt-8">
+                            <button type="submit" class="btn btn-primary btn-md w-full">
+                                Register
+                            </button>
+                        </div>
+
+                        @if ($errors->any())
+                            <div class="mt-4">
+                                <ul class="list-disc list-inside text-sm text-error">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        {{-- <!-- Name -->
                         <label class="floating-label mb-6">
                             <input type="text"
                                    name="name"
@@ -74,7 +121,7 @@
                             <button type="submit" class="btn btn-primary btn-md w-full">
                                 Register
                             </button>
-                        </div>
+                        </div> --}}
                     </form>
 
                     <div class="divider">OR</div>

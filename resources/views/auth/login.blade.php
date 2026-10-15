@@ -9,10 +9,43 @@
                 <div class="card-body">
                     <h1 class="text-3xl font-bold text-center mb-6">Welcome Back</h1>
 
-                    <form method="POST" action="/login">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
+                            
+                        <label class="label">Email</label>
+                        <input type="email"
+                                name="email"
+                                placeholder="mail@example.com"
+                                value="{{ old('email') }}"
+                                class="input input-bordered mb-4"
+                                required />
 
-                        <!-- Email -->
+                        <label class="label">Password</label>
+                        <input type="password"
+                                name="password"
+                                placeholder="••••••••"
+                                class="input input-bordered"
+                                required />
+                            
+
+                        <div class="form-control mt-8">
+                            <button type="submit" class="btn btn-primary btn-md w-full">
+                                Login
+                            </button>
+                        </div>
+
+                        @if ($errors->any())
+                            <div class="mt-4">
+                                <ul class="list-disc list-inside text-sm text-error">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <!-- Email --> 
+                        {{-- //these will be added later for validation errors
                         <label class="floating-label mb-6">
                             <input type="email"
                                    name="email"
@@ -48,7 +81,7 @@
                             <button type="submit" class="btn btn-primary btn-md w-full">
                                 Login
                             </button>
-                        </div>
+                        </div> --}}
                     </form>
 
                     <div class="divider">OR</div>

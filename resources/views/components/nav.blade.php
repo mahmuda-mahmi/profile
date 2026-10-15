@@ -20,15 +20,21 @@
         </ul>
     </div>
     <div class="navbar-end gap-2">
+        @guest
+            <a href="/login" class="py-4 btn btn-ghost btn-sm">Log In</a>
+            <a href="/register" class="py-4 btn btn-primary btn-sm">Register</a>
+        @endguest
+
         @auth
-            <span class="text-sm hidden sm:inline">{{ auth()->user()->name }}</span>
+            <span class="text-sm hidden sm:inline">{{ Auth::user()->name }}</span>
+            <div class="divider divider-horizontal"></div>
+            <a href="/profile/create" class="py-4 text-sm">Create New Profile</a>
+            <div class="divider divider-horizontal"></div>
             <form method="POST" action="/logout">
                 @csrf
                 <button type="submit" class="py-4 btn btn-ghost btn-sm">Logout</button>
             </form>
-        @else
-            <a href="/login" class="py-4 btn btn-ghost btn-sm">Log In</a>
-            <a href="/register" class="py-4 btn btn-primary btn-sm">Register</a>
         @endauth
+        
     </div>
 </nav>
