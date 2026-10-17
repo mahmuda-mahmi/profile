@@ -12,11 +12,11 @@ class ProfileController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
+    {        
         $profiles = Profile::orderBy('name', 'asc')
-                            ->select('id', 'name', 'email', 'dob', 'phone')
-                            ->paginate(10)
-                            ->withQueryString();
+                        ->select('id', 'name', 'email', 'dob', 'phone')
+                        ->paginate(10)
+                        ->withQueryString();
 
         return view('profiles.index', compact('profiles'));
     }
@@ -42,7 +42,7 @@ class ProfileController extends Controller
         ]);
         // validated requests all data so we should not use it. 
         $profile = Profile::create([
-            'name'  => $request->input('name'),
+            'name' => $request->input('name'),
             'email' => $request->input('email'),
             'dob'   => $request->input('dob'),
             'phone' => $request->input('phone'),
